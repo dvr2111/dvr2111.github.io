@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balthazar Media — Become the Main Character</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-orange: #FF4D00;
+            --brand-orange-glow: rgba(255, 77, 0, 0.35);
+            --bg-black: #0A0A0C;
+            --bg-card: #141418;
+            --bg-card-hover: #1C1C22;
+            --text-main: #F4F4F6;
+            --text-muted: #8E8E9A;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-family: 'Syne', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo img {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--brand-orange);
+            box-shadow: 0 0 12px var(--brand-orange-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.highlight {
+            color: var(--brand-orange);
+            border: 1px solid var(--brand-orange);
+            background: rgba(255, 77, 0, 0.1);
+        }
+
+        .nav-item.highlight:hover {
+            background: var(--brand-orange);
+            color: #000;
+            box-shadow: 0 0 15px var(--brand-orange-glow);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, rgba(255, 77, 0, 0.15) 0%, rgba(10, 10, 12, 0) 70%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .hero-logo-frame {
+            width: 140px;
+            height: 140px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 2px solid var(--brand-orange);
+            box-shadow: 0 0 40px var(--brand-orange-glow);
+            animation: pulseGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(255, 77, 0, 0.3); }
+            100% { box-shadow: 0 0 50px rgba(255, 77, 0, 0.7); }
+        }
+
+        .hero-logo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            color: var(--brand-orange);
+        }
+
+        .hero p.tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* SECTION LAYOUTS */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem 6rem;
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .section-header h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        /* CONTENT GRIDS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            background: var(--bg-card-hover);
+            border-color: rgba(255, 77, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card-media {
+            height: 200px;
+            background: #111;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .card:hover .card-media img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            color: var(--brand-orange);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.3rem 0.7rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 77, 0, 0.3);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1.2rem;
+            border-radius: var(--radius-md);
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--brand-orange);
+            color: #000;
+            border-color: var(--brand-orange);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 20px var(--brand-orange-glow);
+            transform: translateY(-2px);
+        }
+
+        /* POETRY / TEXT CARDS SPECIFIC */
+        .poetry-card {
+            background: radial-gradient(circle at top right, rgba(255, 77, 0, 0.05), transparent);
+            font-style: italic;
+        }
+
+        .stanza-preview {
+            border-left: 2px solid var(--brand-orange);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #D1D1D8;
+            font-family: serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* CHARACTER ENGINE INTERACTIVE MODULE */
+        .engine-container {
+            background: linear-gradient(135deg, rgba(20, 20, 24, 0.9) 0%, rgba(10, 10, 12, 0.95) 100%);
+            border: 1px solid var(--brand-orange);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 0 40px var(--brand-orange-glow);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 850px) {
+            .engine-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .engine-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--brand-orange);
+        }
+
+        .form-group input, .form-group select {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--brand-orange);
+            box-shadow: 0 0 10px var(--brand-orange-glow);
+        }
+
+        .character-card-preview {
+            background: #000;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-card-preview::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: var(--brand-orange);
+            filter: blur(90px);
+            opacity: 0.2;
+        }
+
+        .char-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .char-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--brand-orange);
+            object-fit: cover;
+        }
+
+        .char-title h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+        }
+
+        .char-title p {
+            color: var(--brand-orange);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .char-stat {
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.8rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--brand-orange);
+        }
+
+        .char-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .char-stat-val {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* RESPONSIVE NAV MOBILE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: flex;
+                overflow-x: auto;
+                max-width: 100%;
+                padding-bottom: 0.5rem;
+            }
+            .hero h1 { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand-logo" onclick="switchTab('home')">
+                <img src="Logo_Final.jpg" alt="Balthazar Media Logo">
+                <span>BALTHAZAR MEDIA</span>
+            </a>
+            <ul class="nav-links">
+                <li><a class="nav-item active" onclick="switchTab('home')">Home</a></li>
+                <li><a class="nav-item" onclick="switchTab('films')">Films</a></li>
+                <li><a class="nav-item" onclick="switchTab('podcasts')">Podcasts</a></li>
+                <li><a class="nav-item" onclick="switchTab('documentaries')">Documentaries</a></li>
+                <li><a class="nav-item" onclick="switchTab('books')">Books</a></li>
+                <li><a class="nav-item" onclick="switchTab('poetry')">Poetry</a></li>
+                <li><a class="nav-item highlight" onclick="switchTab('engine')">Character Engine</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+
+        <!-- TAB: HOME -->
+        <section id="tab-home" class="page-section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-logo-frame">
+                        <img src="Logo_Final.jpg" alt="Balthazar Media Logo">
+                    </div>
+                    <h1>BALTHAZAR MEDIA</h1>
+                    <p class="tagline">Become the Main Character.</p>
+                    <p style="color: var(--text-muted); max-width: 650px;">
+                        A multi-platform creative powerhouse defining bold cinematic stories, deep immersive audio, gripping documentaries, and transformative character-driven media.
+                    </p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button class="btn btn-primary" onclick="switchTab('engine')">Launch Character Engine</button>
+                        <button class="btn" onclick="switchTab('films')">Explore Catalog</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: FILMS -->
+        <section id="tab-films" class="page-section">
+            <div class="section-header">
+                <div>
+                    <h2>Films</h2>
+                    <p>Cinematic narratives crafted to challenge perception.</p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-media">
+                        <span class="card-badge">Feature Film</span>
+                        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80" alt="Film Poster">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Shadows of the Neon Sun</h3>
+                        <p class="card-desc">In a world governed by algorithm, an unknown rogue agent reconstructs lost memories in search of truth.</p>
+                        <a href="#" class="btn btn-primary">Watch Trailer</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-media">
+                        <span class="card-badge">Short Film</span>
+                        <img src="https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=800&q=80" alt="Film Poster">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">The Anomaly Code</h3>
+                        <p class="card-desc">A lone astronomer discovers an echoing frequency coming from deep space that mirrors human consciousness.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: PODCASTS -->
+        <section id="tab-podcasts" class="page-section">
+            <div class="section-header">
+                <div>
+                    <h2>Podcasts</h2>
+                    <p>Immersive audio experiences and conversations with visionary thinkers.</p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-media">
+                        <span class="card-badge">Weekly Audio</span>
+                        <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80" alt="Podcast Studio">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">The Hero’s Journey Podcast</h3>
+                        <p class="card-desc">Deep dives into high performance, narrative identity, and mastering self-mastery in modern life.</p>
+                        <a href="#" class="btn btn-primary">Listen Now</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-media">
+                        <span class="card-badge">Fiction Series</span>
+                        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=800&q=80" alt="Audio Drama">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Midnight Frequencies</h3>
+                        <p class="card-desc">An audio drama following an nocturnal radio host who takes calls from listeners experiencing unexplained events.</p>
+                        <a href="#" class="btn">Listen Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: DOCUMENTARIES -->
+        <section id="tab-documentaries" class="page-section">
+            <div class="section-header">
+                <div>
+                    <h2>Documentaries</h2>
+                    <p>Uncovering real-world stories of extraordinary individuals and phenomena.</p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-media">
+                        <span class="card-badge">Docuseries</span>
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Docuseries">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Architects of Reality</h3>
+                        <p class="card-desc">A investigative series following innovators, creators, and storytellers reshaping our physical and virtual landscapes.</p>
+                        <a href="#" class="btn btn-primary">Watch Series</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: BOOKS -->
+        <section id="tab-books" class="page-section">
+            <div class="section-header">
+                <div>
+                    <h2>Books</h2>
+                    <p>Published works designed to expand consciousness and spark imagination.</p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-media">
+                        <span class="card-badge">Hardcover & E-Book</span>
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Book Cover">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Main Character Energy</h3>
+                        <p class="card-desc">A guidebook on narrative agency, intentional life design, and crafting your ultimate personal arc.</p>
+                        <a href="#" class="btn btn-primary">Order Copy</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: POETRY -->
+        <section id="tab-poetry" class="page-section">
+            <div class="section-header">
+                <div>
+                    <h2>Poetry Collections</h2>
+                    <p>Rhythmic expressions of emotion, identity, and the human condition.</p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="card poetry-card">
+                    <div class="card-body">
+                        <span class="card-badge" style="position: static; margin-bottom: 1rem; display: inline-block;">Collection No. 1</span>
+                        <h3 class="card-title">Echoes in Orange & Ink</h3>
+                        <div class="stanza-preview">
+                            "We build our gods from static screens,<br>
+                            And trade our shadows for the light,<br>
+                            Yet in the silence of the dawn,<br>
+                            We claim the title of the night."
+                        </div>
+                        <p class="card-desc">An exploration of solitude, modern technology, and personal mythmaking.</p>
+                        <a href="#" class="btn">Read Excerpt</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: CHARACTER ENGINE -->
+        <section id="tab-engine" class="page-section">
+            <div class="section-header">
+                <div>
+                    <h2>Character Engine</h2>
+                    <p>Become the Main Character. Design your personal persona and narrative arc.</p>
+                </div>
+            </div>
+
+            <div class="engine-container">
+                <div class="engine-form">
+                    <div class="form-group">
+                        <label>Main Character Name</label>
+                        <input type="text" id="input-name" value="Balthazar Rogue" oninput="updateCard()">
+                    </div>
+                    <div class="form-group">
+                        <label>Archetype</label>
+                        <select id="input-archetype" onchange="updateCard()">
+                            <option value="The Visionary Creator">The Visionary Creator</option>
+                            <option value="The Shadow Catalyst">The Shadow Catalyst</option>
+                            <option value="The Relentless Seeker">The Relentless Seeker</option>
+                            <option value="The Cosmic Wanderer">The Cosmic Wanderer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Primary Mission</label>
+                        <input type="text" id="input-mission" value="Transforming noise into timeless media." oninput="updateCard()">
+                    </div>
+                    <div class="form-group">
+                        <label>Core Superpower</label>
+                        <input type="text" id="input-power" value="Unflinching Narrative Focus" oninput="updateCard()">
+                    </div>
+                </div>
+
+                <div class="character-card-preview">
+                    <div>
+                        <div class="char-header">
+                            <img src="Logo_Final.jpg" class="char-avatar" alt="Character Avatar">
+                            <div class="char-title">
+                                <h3 id="card-name">Balthazar Rogue</h3>
+                                <p id="card-archetype">The Visionary Creator</p>
+                            </div>
+                        </div>
+
+                        <div class="char-stat">
+                            <div class="char-stat-label">Current Quest / Mission</div>
+                            <div class="char-stat-val" id="card-mission">Transforming noise into timeless media.</div>
+                        </div>
+
+                        <div class="char-stat">
+                            <div class="char-stat-label">Core Trait & Power</div>
+                            <div class="char-stat-val" id="card-power">Unflinching Narrative Focus</div>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-color); pt: 1rem; margin-top: 1.5rem; text-align: right;">
+                        <span style="font-size: 0.75rem; color: var(--brand-orange); letter-spacing: 1px; font-weight: 800;">BALTHAZAR MEDIA ARCHETYPE ENGINE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Balthazar Media. All rights reserved. | <strong>Become the Main Character.</strong></p>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Deactivate all nav buttons
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Show selected tab
+            const targetSection = document.getElementById('tab-' + tabId);
+            if(targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Scroll smooth to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Live updating Character Engine Card
+        function updateCard() {
+            document.getElementById('card-name').textContent = document.getElementById('input-name').value || 'Main Character';
+            document.getElementById('card-archetype').textContent = document.getElementById('input-archetype').value;
+            document.getElementById('card-mission').textContent = document.getElementById('input-mission').value || 'Define your path.';
+            document.getElementById('card-power').textContent = document.getElementById('input-power').value || 'Inner Drive';
+        }
+    </script>
+</body>
+</html>
